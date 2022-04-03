@@ -4,9 +4,57 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+    <title>Culinary Units Converter</title>
+    <link rel="shortcut icon" type="image/jpg" href="./favicon-recipes.jpg"/>
+
+    <!-- LINKS -->
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="style.css" /></head>
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&family=Shrikhand&display=swap" rel="stylesheet">
+
 <body>
     
+    <!-- MAIN SECTION -->
+    <div class="main-section">
+
+        <!-- Tabs list / Nav -->
+        <div class="tabs-header">
+            <ul class="tab-list">
+                <li id="welcome-tab" class="active tab"><a class="tab-control" href="#welcome">Welcome!</a></li>
+                <li id="units-tab" class="tab"><a class="tab-control" href="#units">Units</a></li>
+                <li id="yield-tab" class="tab"><a class="tab-control" href="#yield">Yield</a></li>
+            </ul>
+        </div>
+
+        <!-- Panel Container -->
+
+            <!-- Welcome Panel -->
+            <div class="tab-panel active" id="welcome">
+                <div id="welcome-img">
+                </div>
+                <div id="welcome-text">
+                    <h3>Recipe Tools</h3>
+                    <h4>weights and measures</h4>
+                </div>
+            </div>
+
+            <!-- Units Panel -->
+            <div class="units-panel" id="units"></div>
+
+            <!-- Yield Panel -->
+            <div class="yield-panel" id="yield"></div>
+
+
+    </div>
+
+
+
+    <!-- JQuery -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <!-- JAVASCRIPT -->
+    <script type="text/JavaScript" src="main.js"></script>
 </body>
 </html>

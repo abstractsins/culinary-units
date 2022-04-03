@@ -1,0 +1,257 @@
+/* TABLE OF CONTENTS */
+/* 1 -- Global Styles and Variables */
+/* 2 -- Header */
+/* 3 -- Main Section */
+/* END TABLE OF CONTENTS */
+
+/* 1 -- GLOBAL STYLES AND VARIABLES */
+* {
+    /* border: 1px solid red; */
+    /* GLOBAL PROPERTIES */
+    margin: 0;
+    padding: 0;
+    /* CUSTOM COLORS */
+    --bud-green: rgb(112, 174, 110);
+    --dark-liver: rgb(72, 60, 70);
+    --inchworm: rgb(190, 238, 98);
+    --ming: rgb(60, 110, 113);
+    --orange-crayola: rgb(244, 116, 59);
+    --shadow-color: rgba(42, 42, 42, 0.6);
+    --shadow-b-color: rgba(21, 21, 21, 0.8);
+    --charcoal: rgb(49, 49, 49);
+    --charcoal-2: #36454F;
+    --beef-red: rgb(168, 0, 0);
+    --beef-red-2: rgb(112, 0, 0);
+    --index-card-bg: #f3ddbd;
+    --index-card-bg-2: #a59276;
+    --lettuce: #CDE6A5;
+    --avocado: #568203;
+    --pink-frosting: #db7179;
+    --pink-frosting-2: #9c4d55;
+    --ocean: #006994;
+    --ocean-2: #004d6b;
+    --bread: #eee1cf;
+    --bread-2: #a38047;
+    --soup: #F0CA28;
+    --soup-2: #a78d1b;
+    --grape: rgb(187, 125, 231);
+    --grape2: rgb(223, 191, 245);
+    --salmon: rgb(253, 146, 134);
+    --hilighter: rgb(255, 255, 0);
+
+    /* Global colors */
+    --universal-slide-bg-color: whitesmoke;
+    --link-hover-color: rgb(255, 68, 0);
+    --link-active-color: rgba(255, 163, 130, 0.856);
+
+    /* GLOBAL Variables */
+    --index-card-shadow: drop-shadow(10px 15px 5px #000000);
+    --index-card-shadow-2: drop-shadow(3px 5px 2px #000000);
+    --index-card-shadow-3: drop-shadow(8px 8px 2px rgba(0, 0, 0, 0.5));
+    --index-card-shadow-4: drop-shadow(8px 8px 2px rgba(126, 126, 126, 0.4));
+    --tag-shadow: drop-shadow(5px 5px 2px rgba(126, 126, 126, 0.4));
+    --open-recipe-btn-active: rgb(98, 0, 98);
+    --open-recipe-btn-hover: rgba(255, 68, 0, 0.7);
+    --open-recipe-btn: rgba(173, 216, 230, 1);
+
+    /* Background Colors */
+    --header-bg: var(--avocado);
+    --categories-bg: var(--lettuce);
+    --title-bg: var(--avocado);
+    --beef-bg: var(--beef-red);
+    --seafood-bg: var(--ocean);
+    --seafood-bg-2: var(--ocean-2);
+    --soups-bg: var(--soup);
+    --soups-bg-2: var(--soup-2);
+    --desserts-bg: var(--pink-frosting);
+    --desserts-bg-2: var(--pink-frosting-2);
+    --breads-bg: var(--bread);
+    --breads-bg-2: var(--bread-2);
+    --secrets-bg: var(--charcoal);
+    --tag-bg: var(--hilighter);
+
+    /* Card Colors */
+    --more-card-bg: var(--title-bg);
+    --beef-card-bg: var(--index-card-bg);
+    --beef-card-border: var(--charcoal);
+    --beef-card-sections: rgb(236, 218, 183);
+
+}
+
+body {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-self: center;
+    align-items: center;
+    background-color: var(--lettuce);
+    margin: 20px;
+}
+
+a {
+    color: inherit;
+}
+
+/* END 1 -- GLOBAL STYLES AND VARIABLES */
+
+/* 2 -- HEADER */
+/* END 2 -- HEADER */
+
+/* 3 -- MAIN SECTION */
+.main-section {
+    width: 80%;
+}
+/* END 3 -- MAIN SECTION */
+
+/* 4 -- TABS AND PANELS */
+.tabs-header {
+    /* padding-top: 30px; */
+    width: 90%;
+}
+
+.tab-list {
+    margin-bottom: -10px;
+    display: flex;
+}
+
+.tab-list li {
+    font-family: "Roboto Slab", sans-serif;
+    letter-spacing: 0.2ch;
+    display: inline-flex;
+    padding: 20px 15px;
+    border-radius: 8px 8px 0 0;
+    margin: 0 7px 0 0;
+    filter: var(--index-card-shadow-2);
+    font-size: 1.5em;
+}
+
+.tab-list .active {
+    filter: var(--index-card-shadow);
+}
+
+.tab {
+    flex: 1 2 auto;
+    justify-content: center;
+    align-items: center;
+    padding: 1%;
+}
+
+/* TAB COLORS */
+#welcome-tab {
+    background-color: var(--index-card-bg);
+}
+#units-tab {
+    background-color: var(--beef-bg)
+}
+#yield-tab {
+    background-color: var(--desserts-bg)
+}
+
+#welcome {
+    background-image: linear-gradient(var(--index-card-bg), var(--index-card-bg-2));
+    overflow: hidden;
+}
+/* END TAB COLORS */
+
+/* PANEL BACKGROUNDS */
+#welcome-img {
+    background-image: var(--welcome-bg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 0.4;
+    width: 100%;
+    /* height: 100%; */
+}
+#units {
+    background-image: linear-gradient(var(--breads-bg), var(--breads-bg-2));
+}
+#yield {
+    background-image: linear-gradient(var(--desserts-bg), var(--desserts-bg-2));
+}
+/* END PANEL BACKGROUNDS */
+
+/* LINKS AND PSUEDO CLASSES */
+#units-tab a,
+#yield-tab a {
+    color: white;
+}
+#welcome-tab a {
+    color: var(--charcoal);
+}
+
+.tab-list a:hover {
+    text-decoration: overline;
+    color: var(--link-hover-color);
+}
+
+.tab-list a:active {
+    color: var(--link-active-color);
+    text-decoration: none;
+}
+
+.tab-list .active a:hover{
+    cursor: default;
+}
+
+.tabs-header li.active a {
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 120%;
+}
+
+.tab-panel {
+    display: none;
+}
+
+.tab-panel.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    height: 83vh;
+    border-radius: 10px;
+    filter: var(--index-card-shadow);
+    margin-bottom: 30px;
+}
+/* END LINKS AND PSUEDO CLASSES */
+/* END 4 -- TABS & PANELS */
+
+/* 6-A -- WELCOME CARD */
+#welcome-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 65%; 
+    width: auto;
+    position: absolute;
+    align-self: center;
+    -webkit-text-stroke: 2px whitesmoke;
+}
+
+#welcome-text h3 {
+    font-family: "Shrikhand", serif;
+    color: var(--charcoal);
+    color: brown;
+    font-size: 300%;
+    letter-spacing: 0.5ch;
+    margin: 1%;
+    padding: 1%;
+    text-align: center;
+    filter: var(--index-card-shadow);
+    font-weight: 400;
+    justify-content: center;
+}
+
+#welcome-text h4 {
+    font-family: "Roboto Slab";
+    font-size: 200%;
+    text-align: center;
+    -webkit-text-stroke: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.25ch;
+    color: whitesmoke;
+    filter: var(--index-card-shadow-2);
+}
