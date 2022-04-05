@@ -59,6 +59,7 @@
     --categories-bg: var(--lettuce);
     --title-bg: var(--avocado);
     --beef-bg: var(--beef-red);
+    --beef-bg-2: var(--beef-red-2);
     --seafood-bg: var(--ocean);
     --seafood-bg-2: var(--ocean-2);
     --soups-bg: var(--soup);
@@ -164,7 +165,7 @@ a {
     /* height: 100%; */
 }
 #units {
-    background-image: linear-gradient(var(--breads-bg), var(--breads-bg-2));
+    background-image: linear-gradient(var(--beef-bg), var(--beef-bg-2));
 }
 #yield {
     background-image: linear-gradient(var(--desserts-bg), var(--desserts-bg-2));
