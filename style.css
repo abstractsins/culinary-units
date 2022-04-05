@@ -6,7 +6,7 @@
 
 /* 1 -- GLOBAL STYLES AND VARIABLES */
 * {
-    /* border: 1px solid red; */
+    /* border: 1px solid black; */
     /* GLOBAL PROPERTIES */
     margin: 0;
     padding: 0;
@@ -169,6 +169,30 @@ a {
 }
 #yield {
     background-image: linear-gradient(var(--desserts-bg), var(--desserts-bg-2));
+}
+.panel-header {
+    /* display: flex; */
+    /* height: 150px; */
+    padding: 10px;
+    margin: 5px;
+}
+.panel-header h3 {
+    text-align: center;
+    font-size: 2.5em;
+    font-family: 'Roboto Slab', serif;
+}
+.panel-body {
+    display: flex;
+    border-radius: 10px;
+    flex-flow: column;
+    height: 90%;
+    background-color: #eee1cf;
+}
+.whole-panel {
+    display:flex;
+    flex-flow: column;
+    width: 90%;
+    height: 90%;
 }
 /* END PANEL BACKGROUNDS */
 
