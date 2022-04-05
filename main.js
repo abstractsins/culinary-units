@@ -238,8 +238,83 @@ const Units = {
             }
         });
     });
-    /* END -- TAB BROWSING */
+/* END -- TAB BROWSING */
 
+/* 8-C -- TAG RADIO BUTTON FUNCTION */
+const modeSelect = mode => {
+    // CONSOLE TESTING
+    console.log(`You selected ${mode} mode`);
 
-/* 3 -- EXECUTIONS */
-/* END 3 -- EXECUTIONS */
+    let $unitSelect1 = $('#results-1');
+    let $unitSelect2 = $('#results-2');
+    let $weightBtn = $('#weight');
+    let $volumeBtn = $('#volume');
+
+    let unitsArr = [];
+    if (mode === 'weight') {
+        // create array of unit types
+        unitsArr = Object.keys(Units.Weight);
+        // and apply button styles
+        if ($weightBtn.hasClass('active')) {
+            $weightBtn.removeClass('active')
+            unitsArr = [];
+        } else {
+            $weightBtn.addClass('active')
+        };
+        $volumeBtn.removeClass('active');
+    } else if (mode === 'volume') {
+        // create array of unit types
+        unitsArr = Object.keys(Units.Volume);
+        // and apply button styles
+        if ($volumeBtn.hasClass('active')) {
+            $volumeBtn.removeClass('active')
+            unitsArr = [];
+        } else {
+            $volumeBtn.addClass('active');
+        }
+        $weightBtn.removeClass('active');
+    }
+    console.log(unitsArr);
+
+    $unitSelect1.text(unitsArr);
+    $unitSelect2.text(unitsArr);
+
+}
+
+// function tagSort(idNum){
+// 	let tag = document.getElementById(idNum);
+// 	let tagGroup = document.getElementsByClassName('tag master');
+// 	let $ul = $('#tag-results');
+// 	for (let i=0; i<tagGroup.length; i++) {
+// 		if (i === idNum) {
+// 			// IF TAG IS THE ONE YOU CLICKED THEN APPLY STYLES
+// 			tagGroup[i].style.backgroundColor = 'whitesmoke'; 
+// 			tagGroup[i].style.transform = '';
+// 			tagGroup[i].style.filter = 'unset';
+// 			tagGroup[i].classList.add('active');
+			
+// 			/* FILTER RESULTS GO HERE */
+// 			let tagName = tagGroup[i].innerHTML;
+// 			let results = [];
+// 			recipeArr.find(el => {
+// 				for (let i=0; i<7; i++) {
+// 					if (el.tags[i] === tagName) {
+// 						results.push(`<a href="#recipe-display-section" id="${el.id}" onclick="titleClick(${el.id})"><li class="title master">${el.name}</li>`);
+// 					}
+// 				}
+// 			})
+// 			$ul.empty();
+// 			// HERE SPECIFICALLY
+// 			$ul.append(`${results.join('<br>')}</li>`); // RIGHT HERE
+// 		} else if (i != idNum){ // ALL OTHER TAGS
+// 			tagGroup[i].style.backgroundColor = 'var(--tag-bg)';
+// 			tagGroup[i].style.filter = '';
+// 			tagGroup[i].classList.remove('active');
+// 		}
+// 	}
+// }
+/* END 8-C -- TAG RADIO BUTTON FUNCTION */
+
+/* EXECUTIONS */
+/* END -- EXECUTIONS */
+

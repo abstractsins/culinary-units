@@ -187,6 +187,8 @@ a {
     flex-flow: column;
     height: 90%;
     background-color: #eee1cf;
+    justify-content: space-around;
+    align-items: center;
 }
 .whole-panel {
     display:flex;
@@ -197,6 +199,102 @@ a {
 /* END PANEL BACKGROUNDS */
 
 /* LINKS AND PSUEDO CLASSES */
+.mode-select-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    border: 3px solid black;
+    width: 75px;
+    height: 75px;
+    padding: 5px;
+    margin: 15px;
+    font-family: 'Roboto Condensed', sans-serif;
+    color: whitesmoke;
+    font-size: 1.5em;
+    font-weight: normal;
+    background-color: var(--avocado);
+    filter: var(--index-card-shadow-2);
+    transition: filter 200ms,
+                background-color 200ms,
+                color 200ms,
+                font-weight 200ms,
+                transform 200ms;
+}
+
+.mode-select-btn:hover{
+    cursor: pointer;
+}
+
+.mode-select-btn.active{
+    filter: none;
+    color: black;
+    background-color: whitesmoke;
+    font-weight: 700;
+    transform: translate(0, 5px);
+}
+
+.mode-select {
+    background-color: whitesmoke;
+    width: 35%;
+    height: 75%;
+    border: 3px solid black;
+    border-radius: 10px;;
+    padding: 15px;
+    margin: 10px;
+
+}
+.mode-select-section{
+    display:inline-flex;
+}
+
+.program-area {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.io-area {
+    display: flex;
+    height: 200px;
+    align-items: center;
+    width: 75%;
+    justify-content: center;
+}
+
+#equals {
+    font-family: "Shrikhand", serif;
+    font-size: 2em;
+    color: var(--avocado);
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: black;
+    width: fit-content;
+}
+
+.io-area input {
+    display: flex;
+    font-size: 3em;
+    width: 50%;
+    padding: 12px 12px 12px 25px;
+}
+
+.input, .output {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.units-area {
+    display: flex;
+    align-items: space-between;
+    justify-content: space-between;
+    height: 100%;
+    width: 75%;
+}
+
 #units-tab a,
 #yield-tab a {
     color: white;
