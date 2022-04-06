@@ -71,6 +71,9 @@
     --secrets-bg: var(--charcoal);
     --tag-bg: var(--hilighter);
 
+    /* Backgrounds */
+    --no-peeking: url('./no-peeking.jpg');
+
     /* Card Colors */
     --more-card-bg: var(--title-bg);
     --beef-card-bg: var(--index-card-bg);
@@ -183,14 +186,24 @@ a {
     color: whitesmoke;
     -webkit-text-stroke: 1px black;
 }
+.panel-header h4 {
+    text-align: center;
+    font-size: 2em;
+    font-family: 'Roboto Slab', serif;
+    color: var(--charcoal);
+    /* -webkit-text-stroke: 1px black; */
+    /* color: black; */
+}
 .panel-body {
     display: flex;
     border-radius: 10px;
     flex-flow: column;
-    background-color: #709bad;
     justify-content: space-around;
     align-items: center;
     padding: 25px;
+}
+#units-panel-body {
+    background-color: #709bad;
 }
 .whole-panel {
     display:flex;
@@ -356,8 +369,6 @@ input:focus {
 }
 /* DROP DOWN EXPERIEMTNS */
   
-
-
 #units-tab a,
 #yield-tab a {
     color: white;
@@ -402,6 +413,16 @@ input:focus {
     margin-bottom: 30px;
 }
 /* END LINKS AND PSUEDO CLASSES */
+
+#yield-panel-body {
+    background-image: var(--no-peeking);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 100%;
+    background-color: var(--charcoal-2);
+}
+
 /* END 4 -- TABS & PANELS */
 
 /* 6-A -- WELCOME CARD */

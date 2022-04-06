@@ -1,10 +1,15 @@
 // TODO: 
-// 1) add selected unit abbreviation to field
+// - Fraction buttons
+// - Fraction input logic
+// - limit output to 3 decimal places
+
 
 /* TABLE OF CONTENTS */
 // 1 -- Global Concerns
 // 2 -- Tab Browsing
-// 3 -- Unit Object
+// 3 -- Ojects
+// 3A -- Units Object
+// 3B -- Fractions Object
 // 4 -- Mode Radio Button Function
 // 5 -- Input Controls
 // 6 -- Conversion Function Call
@@ -48,7 +53,8 @@ let unitMode, inputUnit, outputUnit;
     });
 /* END 2 -- TAB BROWSING */
 
-/* 3 -- UNIT OBJECT */
+/* 3 -- OBJECTS */
+/* 3A -- UNITS OBJECT */
 const Units = {
     Weight: {
         Grams: {
@@ -255,7 +261,21 @@ const Units = {
         }
     }
 }
-/* END 3 -- UNIT OBJECT*/
+/* END 3A -- UNITS OBJECT*/
+
+/* 3B -- FRACTIONS OBJECT*/
+const Fractions = {
+    halves: [0, .5],
+    thirds: [0, .333, .667],
+    fourths: [0, .25, .5, .75],
+    fifths: [0, .2, .4, .6, .8],
+    sixths: [0, .167, .333, .5, .667, .833],
+    sevenths: [0, .143, .286, .429, .571, .714, .857],
+    eighths: [0, .125, .25, .375, .5, .625, .75, .875],
+    ninths: [0, .111, .222, .333, .444, .556, .667, .778, .889]
+}
+/* END 3B -- FRACTIONS OBJECT*/
+/* END 3 -- OBJECTS*/
 
 /* 4 -- MODE RADIO BUTTON FUNCTION */
 const modeSelect = mode => {
@@ -270,10 +290,16 @@ const modeSelect = mode => {
     // define the mode state
     unitMode = mode;
 
+    let units = [];
+    let abbrvs = [];
     let unitsArr = [];
+
     if (mode === 'weight') {
-        // create array of unit types
-        unitsArr = Object.keys(Units.Weight);
+        // create array of unit types and abbreviations
+        units = Object.keys(Units.Weight);
+        units = Object.keys(Units.Weight);
+        units.forEach(U=>abbrvs.push(Units.Weight[U].unit))
+        for (let i=0; i<units.length; i++) unitsArr.push([units[i], abbrvs[i]]);
         // and apply button styles
         if ($weightBtn.hasClass('active')) {
             $weightBtn.removeClass('active')
@@ -283,8 +309,10 @@ const modeSelect = mode => {
         };
         $volumeBtn.removeClass('active');
     } else if (mode === 'volume') {
-        // create array of unit types
-        unitsArr = Object.keys(Units.Volume);
+        // create array of unit types and abbreviations
+        units = Object.keys(Units.Volume);
+        units.forEach(U=>abbrvs.push(Units.Volume[U].unit))
+        for (let i=0; i<units.length; i++) unitsArr.push([units[i], abbrvs[i]]);
         // and apply button styles
         if ($volumeBtn.hasClass('active')) {
             $volumeBtn.removeClass('active')
@@ -299,8 +327,8 @@ const modeSelect = mode => {
     // apply unit array to dropdowns
     let unitsList = [];
     unitsArr.forEach(unit=>{
-        let inputStr = '<a onclick="unitSelect(\''+unit+'\', \'input\'), conversion()">'+unit+'</a>';
-        let outputStr = '<a onclick="unitSelect(\''+unit+'\', \'output\'), conversion()">'+unit+'</a>';
+        let inputStr = '<a onclick="unitSelect(\''+unit[0]+'\', \''+unit[1]+'\', \'input\'), conversion()">'+unit[0]+' ('+unit[1]+')</a>';
+        let outputStr = '<a onclick="unitSelect(\''+unit[0]+'\', \''+unit[1]+'\', \'output\'), conversion()">'+unit[0]+' ('+unit[1]+')</a>';
         unitsList.push([inputStr,outputStr]);
     })
     const unitsListInput=unitsList.map(units=>units[0])
@@ -319,14 +347,14 @@ function isNumberKey(evt) {
     return true;
 }
 
-// Selecting the input unit
-function unitSelect(unit, io){
+// Selecting the input/output unit
+function unitSelect(unit, abbrv, io){
     if (io==='input') { 
-        $inputBtn.html(unit)    
+        $inputBtn.html(`${unit} (${abbrv})`)    
         console.log(`you selected the ${unit} unit as your ${io}`);
         inputUnit = unit;
     } else if (io==='output') {
-        $outputBtn.html(unit)    
+        $outputBtn.html(`${unit} (${abbrv})`)    
         console.log(`you selected the ${unit} unit as your ${io}`);
         outputUnit = unit;
     }
