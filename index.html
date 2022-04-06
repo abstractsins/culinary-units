@@ -44,30 +44,50 @@
             <!-- Units Panel -->
             <div class="tab-panel" id="units">
                 <div class="whole-panel">
+                    
+                    <!-- Panel Title -->
                     <div class="panel-header">
                         <h3>Convert Culinary Units</h3>
                     </div>
+                    
+                    <!-- Panel Body -->
                     <div class="panel-body">
                         
+                        <!-- Toggle Weight or Volume Buttons -->
                         <div class="mode-select-section">
                             <div class="mode-select-btn" id="weight" onclick="modeSelect('weight')">Weight</div>
                             <div class="mode-select-btn" id="volume" onclick="modeSelect('volume')">Volume</div>
                         </div>
 
+                        <!-- Where the magic happens -->
                         <div class="program-area">
+
+                            <!-- Fields -->
                             <div class="io-area">
                                 <div class="input">
-                                    <input type="text">
+                                    <input id="input" type="text" maxlength="7" onkeypress="return isNumberKey(event)" onkeyup="conversion()"  placeholder="0">
+                                
+                                    <!-- INPUT UNITS DROPDOWN -->
+                                    <div class="mode-select dropdown" id="results-1">
+                                        <button class="dropbtn" id="input-dropbtn">Select Unit</button>
+                                        <div class="dropdown-content" id="input-dropdown"></div>
+                                    </div>
+                                
                                 </div>
                                 <div id="equals"><span id="equals">=</span></div>
                                 <div class="output">
-                                    <input type="text">
+                                    <input id="output" type="text" maxlength="0">
+
+                                    <!-- OUTPUT UNITS DROPDOWN -->
+                                    <div class="mode-select dropdown" id="results-2">
+                                        <button class="dropbtn" id="output-dropbtn">Select Unit</button>
+                                        <div class="dropdown-content" id="output-dropdown"></div>
+                                    </div>
+
                                 </div>                                
                             </div>
-                            <div class="units-area">
-                                <div class="mode-select" id="results-1"></div>
-                                <div class="mode-select" id="results-2"></div>
-                            </div>
+
+
                         </div>
 
                     </div>

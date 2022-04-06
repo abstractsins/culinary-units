@@ -1,13 +1,54 @@
+// TODO: 
+// 1) add selected unit abbreviation to field
+
 /* TABLE OF CONTENTS */
 // 1 -- Global Concerns
-// 2 -- Unit Objects
-// 3 -- Executions
+// 2 -- Tab Browsing
+// 3 -- Unit Object
+// 4 -- Mode Radio Button Function
+// 5 -- Input Controls
+// 6 -- Conversion Function Call
 /* END TABLE OF CONTENTS */
 
 /* 1 -- GLOBAL CONCERNS*/
+const $input = $('#input');
+const $output = $('#output');
+const $inputDrop = $('#input-dropdown');
+const $inputBtn = $('#input-dropbtn')
+const $outputDrop = $('#output-dropdown');
+const $outputBtn = $('#output-dropbtn')
+const $unitSelect1 = $('#results-1');
+const $unitSelect2 = $('#results-2');
+const $weightBtn = $('#weight');
+const $volumeBtn = $('#volume');
+let unitMode, inputUnit, outputUnit;
 /* END 1 -- GLOBAL CONCERNS*/
 
-/* 2 -- UNIT OBJECTS */
+/* 2 -- TAB BROWSING */
+	// as described on page 499 of "JavaScript and JQuery," by Jon Duckett
+    $('.tab-list').each(function() {
+        let $this = $(this);
+        let $tab = $this.find('li.active');
+        let $link = $tab.find('a');
+        let $panel = $($link.attr('href'));
+    
+        $this.on('click', '.tab-control', function(e) {
+            e.preventDefault();
+            let $link = $(this);
+            let id = this.hash;
+    
+            if (id && !$link.is('.active')) {
+                $panel.removeClass('active');
+                $tab.removeClass('active');
+    
+                $panel = $(id).addClass('active');
+                $tab = $link.parent().addClass('active');
+            }
+        });
+    });
+/* END 2 -- TAB BROWSING */
+
+/* 3 -- UNIT OBJECT */
 const Units = {
     Weight: {
         Grams: {
@@ -15,7 +56,7 @@ const Units = {
             type: 'weight',
             formulas: {
                 toGrams: (grams)=>grams,
-                toOunces: (grams)=>grams/0.03527396195,
+                toOunces: (grams)=>grams*0.03527396195,
                 toPounds: (grams)=>grams/453.59237,
                 toKilos: (grams)=>grams/1000
             }
@@ -214,41 +255,20 @@ const Units = {
         }
     }
 }
-/* END 2 -- UNIT OBJECTS*/
+/* END 3 -- UNIT OBJECT*/
 
-/* TAB BROWSING */
-	// as described on page 499 of "JavaScript and JQuery," by Jon Duckett
-    $('.tab-list').each(function() {
-        let $this = $(this);
-        let $tab = $this.find('li.active');
-        let $link = $tab.find('a');
-        let $panel = $($link.attr('href'));
-    
-        $this.on('click', '.tab-control', function(e) {
-            e.preventDefault();
-            let $link = $(this);
-            let id = this.hash;
-    
-            if (id && !$link.is('.active')) {
-                $panel.removeClass('active');
-                $tab.removeClass('active');
-    
-                $panel = $(id).addClass('active');
-                $tab = $link.parent().addClass('active');
-            }
-        });
-    });
-/* END -- TAB BROWSING */
-
-/* 8-C -- TAG RADIO BUTTON FUNCTION */
+/* 4 -- MODE RADIO BUTTON FUNCTION */
 const modeSelect = mode => {
+    // reset button text
+    $inputBtn.html('Select Unit');
+    $outputBtn.html('Select Unit');
+    // reset input/output
+    $input.val('');
+    $output.val('');
     // CONSOLE TESTING
     console.log(`You selected ${mode} mode`);
-
-    let $unitSelect1 = $('#results-1');
-    let $unitSelect2 = $('#results-2');
-    let $weightBtn = $('#weight');
-    let $volumeBtn = $('#volume');
+    // define the mode state
+    unitMode = mode;
 
     let unitsArr = [];
     if (mode === 'weight') {
@@ -276,44 +296,68 @@ const modeSelect = mode => {
     }
     console.log(unitsArr);
 
-    $unitSelect1.text(unitsArr);
-    $unitSelect2.text(unitsArr);
+    // apply unit array to dropdowns
+    let unitsList = [];
+    unitsArr.forEach(unit=>{
+        let inputStr = '<a onclick="unitSelect(\''+unit+'\', \'input\'), conversion()">'+unit+'</a>';
+        let outputStr = '<a onclick="unitSelect(\''+unit+'\', \'output\'), conversion()">'+unit+'</a>';
+        unitsList.push([inputStr,outputStr]);
+    })
+    const unitsListInput=unitsList.map(units=>units[0])
+    const unitsListOutput=unitsList.map(units=>units[1])
+    $inputDrop.html(unitsListInput)
+    $outputDrop.html(unitsListOutput)
 
 }
+/* END 4 -- MODE RADIO BUTTON FUNCTION */
 
-// function tagSort(idNum){
-// 	let tag = document.getElementById(idNum);
-// 	let tagGroup = document.getElementsByClassName('tag master');
-// 	let $ul = $('#tag-results');
-// 	for (let i=0; i<tagGroup.length; i++) {
-// 		if (i === idNum) {
-// 			// IF TAG IS THE ONE YOU CLICKED THEN APPLY STYLES
-// 			tagGroup[i].style.backgroundColor = 'whitesmoke'; 
-// 			tagGroup[i].style.transform = '';
-// 			tagGroup[i].style.filter = 'unset';
-// 			tagGroup[i].classList.add('active');
-			
-// 			/* FILTER RESULTS GO HERE */
-// 			let tagName = tagGroup[i].innerHTML;
-// 			let results = [];
-// 			recipeArr.find(el => {
-// 				for (let i=0; i<7; i++) {
-// 					if (el.tags[i] === tagName) {
-// 						results.push(`<a href="#recipe-display-section" id="${el.id}" onclick="titleClick(${el.id})"><li class="title master">${el.name}</li>`);
-// 					}
-// 				}
-// 			})
-// 			$ul.empty();
-// 			// HERE SPECIFICALLY
-// 			$ul.append(`${results.join('<br>')}</li>`); // RIGHT HERE
-// 		} else if (i != idNum){ // ALL OTHER TAGS
-// 			tagGroup[i].style.backgroundColor = 'var(--tag-bg)';
-// 			tagGroup[i].style.filter = '';
-// 			tagGroup[i].classList.remove('active');
-// 		}
-// 	}
-// }
-/* END 8-C -- TAG RADIO BUTTON FUNCTION */
+/* 5 -- INPUT CONTROLS */
+function isNumberKey(evt) {
+    let charCode = (evt.which) ? evt.which : evt.keyCode;
+    if (charCode === 46 && $input.val().includes('.')) return false;
+    if (charCode !== 46 && charCode > 31 && (charCode < 48 || charCode > 57)) return false;
+    return true;
+}
+
+// Selecting the input unit
+function unitSelect(unit, io){
+    if (io==='input') { 
+        $inputBtn.html(unit)    
+        console.log(`you selected the ${unit} unit as your ${io}`);
+        inputUnit = unit;
+    } else if (io==='output') {
+        $outputBtn.html(unit)    
+        console.log(`you selected the ${unit} unit as your ${io}`);
+        outputUnit = unit;
+    }
+}
+
+$output.on('focus', function(e) {
+    $output.css("background-color", "whitesmoke")
+    e.preventDefault();
+})
+/* END 5 -- INPUT CONTROLS*/
+
+/* 6 -- CONVERSION FUNCTION CALL */
+function conversion(){
+    // define the argument
+    const input = $input.val()
+    // build function string;
+    let functionStr='';
+    if (unitMode==='weight') functionStr+='Units.Weight'
+    else if (unitMode==='volume') functionStr+='Units.Volume';
+    functionStr+=`.${inputUnit}.formulas.to${outputUnit}(${input})`;
+    // call the function string
+    $output.val(eval(functionStr));
+    // make sure it doesn't display any non number
+    if ($output.val()==='NaN') {
+        $output.val('')
+    }
+}
+/* END 6 -- CONVERSION FUNCTION CALL */
+
+/* EXPERIMENTS*/
+/* END -- EXPERIMENTS*/
 
 /* EXECUTIONS */
 /* END -- EXECUTIONS */
