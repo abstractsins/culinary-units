@@ -1,8 +1,9 @@
 // TODO: 
 // - Fraction buttons
 // - Fraction input logic
-// - limit output to 3 decimal places
-
+// --- when there is no input yet -- make it the input with a 0 - done!
+// --- when there is already a decimal -- change it
+// --- when there is no decimal -- add it
 
 /* TABLE OF CONTENTS */
 // 1 -- Global Concerns
@@ -265,14 +266,14 @@ const Units = {
 
 /* 3B -- FRACTIONS OBJECT*/
 const Fractions = {
-    halves: [0, .5],
-    thirds: [0, .333, .667],
-    fourths: [0, .25, .5, .75],
-    fifths: [0, .2, .4, .6, .8],
-    sixths: [0, .167, .333, .5, .667, .833],
-    sevenths: [0, .143, .286, .429, .571, .714, .857],
-    eighths: [0, .125, .25, .375, .5, .625, .75, .875],
-    ninths: [0, .111, .222, .333, .444, .556, .667, .778, .889]
+    halves: [0, ['1/2', .5]],
+    thirds: [0, ['1/3', .333], ['2/3',.667]],
+    fourths: [0, ['1/4',.25], ['2/4',.5], ['3/4',.75]],
+    fifths: [0, ['1/5',.2], ['2/5',.4], ['3/5',.6], ['4/5',.8]],
+    sixths: [0, ['1/6',.167], ['2/6',.333], ['3/6',.5], ['4/6',.667], ['5/6',.833]],
+    sevenths: [0, ['1/7',.143], ['2/7',.286], ['3/7',.429], ['4/7',.571], ['5/7',.714], ['6/7',.857]],
+    eighths: [0, ['1/8',.125], ['2/8',.25], ['3/8',.375], ['4/8',.5], ['5/8',.625], ['6/8',.75], ['7/8',.875]],
+    ninths: [0, ['1/9',.111], ['2/9',.222], ['3/9',.333], ['4/9',.444], ['5/9',.556], ['6/9',.667], ['7/9',.778], ['8/9',.889]]
 }
 /* END 3B -- FRACTIONS OBJECT*/
 /* END 3 -- OBJECTS*/
@@ -285,8 +286,6 @@ const modeSelect = mode => {
     // reset input/output
     $input.val('');
     $output.val('');
-    // CONSOLE TESTING
-    console.log(`You selected ${mode} mode`);
     // define the mode state
     unitMode = mode;
 
@@ -304,8 +303,13 @@ const modeSelect = mode => {
         if ($weightBtn.hasClass('active')) {
             $weightBtn.removeClass('active')
             unitsArr = [];
+            // CONSOLE TESTING
+            console.log(`You turned off ${mode} mode`);   
+            mode = 'none';         
         } else {
             $weightBtn.addClass('active')
+            // CONSOLE TESTING
+            console.log(`You selected ${mode} mode`);
         };
         $volumeBtn.removeClass('active');
     } else if (mode === 'volume') {
@@ -317,8 +321,13 @@ const modeSelect = mode => {
         if ($volumeBtn.hasClass('active')) {
             $volumeBtn.removeClass('active')
             unitsArr = [];
+            // CONSOLE TESTING
+            console.log(`You turned off ${mode} mode`);   
+            mode = 'none';         
         } else {
             $volumeBtn.addClass('active');
+            // CONSOLE TESTING
+            console.log(`You selected ${mode} mode`);
         }
         $weightBtn.removeClass('active');
     }
@@ -340,6 +349,7 @@ const modeSelect = mode => {
 /* END 4 -- MODE RADIO BUTTON FUNCTION */
 
 /* 5 -- INPUT CONTROLS */
+// Allowing only numbers and decimal point as input
 function isNumberKey(evt) {
     let charCode = (evt.which) ? evt.which : evt.keyCode;
     if (charCode === 46 && $input.val().includes('.')) return false;
@@ -348,7 +358,7 @@ function isNumberKey(evt) {
 }
 
 // Selecting the input/output unit
-function unitSelect(unit, abbrv, io){
+function unitSelect(unit, abbrv, io) {
     if (io==='input') { 
         $inputBtn.html(`${unit} (${abbrv})`)    
         console.log(`you selected the ${unit} unit as your ${io}`);
@@ -360,10 +370,36 @@ function unitSelect(unit, abbrv, io){
     }
 }
 
+// Unsetting CSS styles on output:focus
 $output.on('focus', function(e) {
     $output.css("background-color", "whitesmoke")
     e.preventDefault();
 })
+
+// Adding fractions to input
+function addFrac(fraction) {
+    let input = $input.val();
+    let deciP = input.indexOf('.');
+    // CONSOLE TESTING
+    console.log(`you have selected the fraction: ${fraction[0]}, decimal value: ${fraction[1]}`)
+    // If there is no input yet... place it....
+    if (input === '') {
+        $input.val(fraction[1])
+        conversion();
+    }
+    // If there is no decimal already... add it;
+    else if (deciP === -1) {
+        $input.val(Number(input)+fraction[1])
+        if (mode !=='none') conversion();
+    }
+    // If there is a decimal... replace it;
+    else if (deciP !== -1 ) {
+        input -= Number(input.split('').splice(deciP, input.length-1).join(''));
+        $input.val(Number(input)+fraction[1])
+        if (mode !=='none') conversion();
+    }
+}
+
 /* END 5 -- INPUT CONTROLS*/
 
 /* 6 -- CONVERSION FUNCTION CALL */
@@ -376,11 +412,20 @@ function conversion(){
     else if (unitMode==='volume') functionStr+='Units.Volume';
     functionStr+=`.${inputUnit}.formulas.to${outputUnit}(${input})`;
     // call the function string
-    $output.val(eval(functionStr));
-    // make sure it doesn't display any non number
-    if ($output.val()==='NaN') {
-        $output.val('')
+    let output = eval(functionStr).toString();
+    // set decimal places
+    const outputArrRev = output.split('').reverse();
+    const deciCount = outputArrRev.indexOf('.');
+    if (deciCount > 3) {
+        console.log('number has more than 3 deci')
+        const diff = deciCount - 3;
+        outputArrRev.splice(0, diff);
     }
+    output = outputArrRev.reverse().join('');
+    // Write output
+    $output.val(output);
+    // make sure it doesn't display any non number
+    if ($output.val()==='NaN') $output.val('');
 }
 /* END 6 -- CONVERSION FUNCTION CALL */
 

@@ -65,6 +65,18 @@
                             <!-- Fields -->
                             <div class="io-area">
                                 <div class="input">
+                                    <!-- FRACTIONS -->
+                                    <div class="fractions-input">
+                                        <!-- TEST BUTTON -->
+                                        <div class="fraction-button third" onclick="addFrac(Fractions.thirds[1])"><span class="fraction">1/3</span></div>
+                                        <div class="fraction-button third" onclick="addFrac(Fractions.thirds[2])"><span class="fraction">2/3</span></div>
+                                        <div class="fraction-button fourth" onclick="addFrac(Fractions.fourths[1])"><span class="fraction">1/4</span></div>
+                                        <div class="fraction-button fourth" onclick="addFrac(Fractions.fourths[3])"><span class="fraction">3/4</span></div>
+                                        <div class="fraction-button eighth" onclick="addFrac(Fractions.eighths[1])"><span class="fraction">1/8</span></div>
+                                        <div class="fraction-button eighth" onclick="addFrac(Fractions.eighths[3])"><span class="fraction">3/8</span></div>
+                                        <div class="fraction-button eighth" onclick="addFrac(Fractions.eighths[5])"><span class="fraction">5/8</span></div>
+                                        <div class="fraction-button eighth" onclick="addFrac(Fractions.eighths[7])"><span class="fraction">7/8</span></div>
+                                    </div>
                                     <input id="input" type="text" maxlength="7" onkeypress="return isNumberKey(event)" onkeyup="conversion()"  placeholder="0">
                                 
                                     <!-- INPUT UNITS DROPDOWN -->
@@ -107,6 +119,7 @@
                     <!-- Panel Body -->
                     <div class="panel-body" id="yield-panel-body">
                     </div>
+                    <caption>Photo by Gabriel Tovar on Unsplash</caption>
 
                 </div>
             </div>

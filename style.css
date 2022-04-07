@@ -49,6 +49,10 @@
     --index-card-shadow-2: drop-shadow(3px 5px 2px #000000);
     --index-card-shadow-3: drop-shadow(8px 8px 2px rgba(0, 0, 0, 0.5));
     --index-card-shadow-4: drop-shadow(8px 8px 2px rgba(95, 95, 95, 0.5));
+
+    --index-card-shadow-5: drop-shadow(4px 4px 2px rgba(0, 0, 0, 0.5));
+    --index-card-shadow-6: drop-shadow(4px 4px 2px rgba(95, 95, 95, 0.5));
+
     --tag-shadow: drop-shadow(5px 5px 2px rgba(126, 126, 126, 0.4));
     --open-recipe-btn-active: rgb(98, 0, 98);
     --open-recipe-btn-hover: rgba(255, 68, 0, 0.7);
@@ -230,11 +234,11 @@ a {
     font-weight: normal;
     background-color: var(--avocado);
     filter: var(--index-card-shadow-4);
-    transition: filter 200ms,
-                background-color 200ms,
-                color 200ms,
-                font-weight 200ms,
-                transform 200ms;
+    transition: filter 100ms,
+                background-color 100ms,
+                color 100ms,
+                font-weight 100ms,
+                transform 100ms;
 }
 
 .mode-select-btn:hover{
@@ -302,9 +306,76 @@ a {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: space-between;
     width: fit-content;
     padding: 20px;
 }
+
+.fractions-input {
+    display: flex;
+    flex-flow: row wrap;
+    width: 200px
+}
+
+.fraction-button {
+    height: 40px;
+    width: 40px;
+    border-radius: 10px;
+    border: 1px solid whitesmoke;
+    background-color: var(--charcoal);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 2px 10px 2px;
+    filter: var(--index-card-shadow-6);
+    user-select: none;
+    transition: filter 100ms,
+                background-color 100ms,
+                border-color 100ms,
+                color 100ms,
+                font-weight 100ms,
+                transform 100ms;
+}
+
+.fraction-button:hover {
+    cursor: pointer;
+    border-color: var(--charcoal);
+    background-color: whitesmoke;
+    filter: var(--index-card-shadow-5);
+}
+.fraction-button:active{
+    filter: none;
+    /* background-color: whitesmoke; */
+    /* font-weight: 700; */
+    transform: translate(0, 5px);
+}
+.third {
+    background-color: var(--charcoal);
+}
+.fourth {
+    background-color: var(--charcoal-2);
+}
+.eighth {
+    background-color: black;
+}
+span.fraction {
+    color: whitesmoke;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Roboto Slab";
+    font-size: 1em;
+    width: 100%;
+    height: 100%;
+}
+span.fraction:hover {
+    color: var(--charcoal);
+}
+span.fraction:active {
+    color: var(--soup);
+}
+
+
 
 input:focus {
     /* border: 3px dashed black; */
