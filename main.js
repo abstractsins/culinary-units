@@ -305,7 +305,7 @@ const modeSelect = mode => {
             unitsArr = [];
             // CONSOLE TESTING
             console.log(`You turned off ${mode} mode`);   
-            mode = 'none';         
+            unitMode = 'none';         
         } else {
             $weightBtn.addClass('active')
             // CONSOLE TESTING
@@ -323,7 +323,7 @@ const modeSelect = mode => {
             unitsArr = [];
             // CONSOLE TESTING
             console.log(`You turned off ${mode} mode`);   
-            mode = 'none';         
+            unitMode = 'none';         
         } else {
             $volumeBtn.addClass('active');
             // CONSOLE TESTING
@@ -390,13 +390,13 @@ function addFrac(fraction) {
     // If there is no decimal already... add it;
     else if (deciP === -1) {
         $input.val(Number(input)+fraction[1])
-        if (mode !=='none') conversion();
+        if (unitMode !=='none') conversion();
     }
     // If there is a decimal... replace it;
     else if (deciP !== -1 ) {
         input -= Number(input.split('').splice(deciP, input.length-1).join(''));
         $input.val(Number(input)+fraction[1])
-        if (mode !=='none') conversion();
+        if (unitMode !=='none') conversion();
     }
 }
 
