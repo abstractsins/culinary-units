@@ -8,7 +8,7 @@
 /* TABLE OF CONTENTS */
 // 1 -- Global Concerns
 // 2 -- Tab Browsing
-// 3 -- Ojects
+// 3 -- Objects
 // 3A -- Units Object
 // 3B -- Fractions Object
 // 4 -- Mode Radio Button Function
@@ -85,7 +85,7 @@ const Units = {
                 toGrams: (pounds)=>pounds*453.59237,
                 toOunces: (pounds)=>pounds*16,
                 toPounds: (pounds)=>pounds,
-                toKilos: (pounds)=>pounds*0.02834952
+                toKilos: (pounds)=>pounds*0.453592
             }
         },
         Kilos: {
@@ -399,7 +399,6 @@ function addFrac(fraction) {
         if (unitMode !=='none') conversion();
     }
 }
-
 /* END 5 -- INPUT CONTROLS*/
 
 /* 6 -- CONVERSION FUNCTION CALL */

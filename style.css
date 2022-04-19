@@ -375,8 +375,6 @@ span.fraction:active {
     color: var(--soup);
 }
 
-
-
 input:focus {
     /* border: 3px dashed black; */
     background-color: var(--soup);
